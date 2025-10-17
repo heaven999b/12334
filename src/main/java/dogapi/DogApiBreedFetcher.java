@@ -35,17 +35,20 @@ public class DogApiBreedFetcher implements BreedFetcher {
 
         try (Response response = client.newCall(request).execute()) {
             JSONObject json = new JSONObject(response.body().string());
+
+            // ✅ 只有真正出错时才抛异常
             if ("error".equals(json.getString("status"))) {
-                throw new BreedFetcher.BreedNotFoundException(json.getString("message"));
+                throw new BreedNotFoundException(json.getString("message"));
             }
+
             JSONArray arr = json.getJSONArray("message");
             List<String> subs = new ArrayList<>();
             for (int i = 0; i < arr.length(); i++) {
                 subs.add(arr.getString(i));
             }
             return subs;
-        } catch (Exception e) {
-            throw new BreedFetcher.BreedNotFoundException("Error fetching breed info");
+        } catch (IOException e) {
+            throw new BreedNotFoundException("Network error: " + e.getMessage());
         }
     }
 }
