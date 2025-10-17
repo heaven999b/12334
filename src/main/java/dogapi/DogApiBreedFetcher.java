@@ -34,6 +34,9 @@ public class DogApiBreedFetcher implements BreedFetcher {
         Request request = new Request.Builder().url(url).build();
 
         try (Response response = client.newCall(request).execute()) {
+            if (response.body() == null) {
+                return List.of(); 
+            }
             JSONObject json = new JSONObject(response.body().string());
 
             // ✅ 只有真正出错时才抛异常
