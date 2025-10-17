@@ -30,6 +30,9 @@ public class CachingBreedFetcher implements BreedFetcher {
         callsMade++;
         List<String> subs = fetcher.getSubBreeds(breed);
         cache.put(breed, subs);
+
+
+
         return subs;
     }
 
