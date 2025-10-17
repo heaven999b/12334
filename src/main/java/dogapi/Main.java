@@ -27,8 +27,7 @@ public class Main {
         // TODO Task 3 implement this code so that it is entirely consistent with its provided documentation.
         // return statement included so that the starter code can compile and run.
         try {
-            List<String> subs = breedFetcher.getSubBreeds(breed);
-            return subs.size();
+            return breedFetcher.getSubBreeds(breed).size();
         } catch (BreedFetcher.BreedNotFoundException e) {
             return 0;
         }
