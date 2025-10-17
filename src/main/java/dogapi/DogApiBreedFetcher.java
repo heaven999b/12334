@@ -50,8 +50,8 @@ public class DogApiBreedFetcher implements BreedFetcher {
                 subs.add(arr.getString(i));
             }
             return subs;
-        } catch (Exception e) {
-            return List.of();
+        }  catch (IOException e) {
+            throw new BreedNotFoundException("Network error: " + e.getMessage());
         }
     }
 }
