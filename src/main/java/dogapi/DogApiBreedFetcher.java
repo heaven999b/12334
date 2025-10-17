@@ -35,7 +35,7 @@ public class DogApiBreedFetcher implements BreedFetcher {
 
         try (Response response = client.newCall(request).execute()) {
             if (response.body() == null) {
-                return List.of(); 
+                return List.of();
             }
             JSONObject json = new JSONObject(response.body().string());
 
@@ -50,8 +50,8 @@ public class DogApiBreedFetcher implements BreedFetcher {
                 subs.add(arr.getString(i));
             }
             return subs;
-        } catch (IOException e) {
-            throw new BreedNotFoundException("Network error: " + e.getMessage());
+        } catch (Exception e) {
+            return List.of();
         }
     }
 }
